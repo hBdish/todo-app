@@ -1,0 +1,75 @@
+version: '3.5'
+
+services:
+  auth:
+    restart: always
+    build:
+      dockerfile: auth-service/Dockerfile
+    container_name: auth
+    ports:
+      - "6100:6100"
+    environment:
+      - DATEBASE_HOST=db_auth
+    env_file:
+      - .env
+    depends_on:
+      - db_auth
+    networks:
+      - internal_net
+
+  db_auth:
+    restart: always
+    container_name: db_auth
+    ports:
+      - "6101:6101"
+    environment:
+      - POSTGRES_USER=${DATEBASE_USER}
+      - POSTGRES_PASSWORD=${DATEBASE_PASSWORD}
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    env_file:
+      - .env
+    image: postgres:16-alpine
+    volumes:
+      - ./auth-service/__volumes:/var/lib/postgresql/data
+    command:
+      - "postgres"
+      - "-c"
+      - "port=6101"
+    networks:
+      - internal_net
+
+  data:
+    build:
+      dockerfile: data-service/Dockerfile
+    container_name: data
+    ports:
+      - "6200:6200"
+    environment:
+      HOST_DOCKER_CONTAINER: db_data
+    env_file:
+      - .env
+    depends_on:
+      - db_data
+    networks:
+      - internal_net
+
+  db_data:
+    restart: always
+    container_name: db_data
+    image: mongo:7.0.3
+    volumes:
+      - ./data-service/__volumes:/data/db
+    command: mongod --port ${DATEBASE_PORT_MONGO}
+    ports:
+      - "6201:6201"
+    environment:
+      MONGO_INITDB_DATABASE: ${DATEBASE_NAME_MONGO}
+    env_file:
+      - .env
+    networks:
+      - internal_net
+
+
+networks:
+  internal_net:
+    driver: bridge

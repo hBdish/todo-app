@@ -1,0 +1,13 @@
+.git
+.gitignore
+.dockerignore
+.env.example
+**/.idea
+.husky
+**/node_modules
+**/dist
+npm-debug.log
+docker-compose*
+README.md
+LICENSE
+.vscode

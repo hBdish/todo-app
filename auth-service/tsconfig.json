@@ -1,0 +1,62 @@
+{
+  "compilerOptions": {
+    /* Visit https://aka.ms/tsconfig to read more about this file */
+    /* Language and Environment */
+    "target": "ESNext",
+    /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
+    "lib": [
+      "ESNext"
+    ],
+    /* Specify a set of bundled library declaration files that describe the target runtime environment. */
+
+    /* Modules */
+    "module": "NodeNext",
+    /* Specify what module code is generated. */
+    //    "rootDir": "./src",/* Specify the root folder within your source files. */
+    "rootDirs": [
+      "./src"
+    ],
+    /* Allow multiple folders to be treated as one when resolving modules. */
+    "typeRoots": [
+      "./src/types/express/index.d.ts"
+    ],
+    /* Specify multiple folders that act like './node_modules/@types.ts'. */
+    "resolveJsonModule": true,
+    /* Enable importing .json files. */
+
+    /* JavaScript Support */
+    "allowJs": true,
+    /* Allow JavaScript files to be a part of your program. Use the 'checkJS' option to get errors from these files. */
+
+    /* Emit */
+    "outDir": "./dist",
+    /* Specify an output folder for all emitted files. */
+    "removeComments": true,
+    /* Disable emitting comments. */
+    "esModuleInterop": true,
+    /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables 'allowSyntheticDefaultImports' for type compatibility. */
+    "forceConsistentCasingInFileNames": true,
+    /* Ensure that casing is correct in imports. */
+
+    /* Type Checking */
+    "strict": true,
+    /* Enable all strict type-checking options. */
+    "noImplicitAny": true,
+    /* Enable error reporting for expressions and declarations with an implied 'any' type. */
+    "sourceMap": true,
+    "skipLibCheck": true
+    /* Skip type checking all .d.ts files. */
+  },
+  "include": [
+    "./src/**/*"
+  ],
+  "exclude": [
+    "node_modules"
+  ],
+  "lib": [
+    "esnext"
+  ],
+  "ts-node": {
+    "esm": true
+  }
+}
